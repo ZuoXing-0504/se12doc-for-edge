@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "TextExport · 内容导出",
+  "version": "1.0.0",
+  "description": "选中任意网页文字或图片，一键导出为 Word (.doc) 或 PDF",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' http: https: data: blob:"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "TextExport 内容导出"
+  },
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

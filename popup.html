@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: #faf8f4;
+    color: #1a1714;
+    width: 260px;
+    padding: 0;
+  }
+
+  .header {
+    background: #1a1714;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 26px; height: 26px;
+    background: #c8820a;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .logo-icon svg { width: 14px; height: 14px; fill: white; }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .body { padding: 14px 16px; }
+
+  .step {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26,23,20,0.08);
+    align-items: flex-start;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #c8820a;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text {
+    font-size: 13px;
+    color: #4a4540;
+    line-height: 1.65;
+  }
+
+  .step-text strong { color: #1a1714; font-weight: 500; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 0 1px;
+  }
+
+  .badge-word { background: #e1f5ee; color: #0f6e56; }
+  .badge-pdf  { background: #fcebeb; color: #a32d2d; }
+
+  .footer {
+    padding: 10px 16px;
+    background: #f2ede4;
+    font-size: 11px;
+    color: #8a847e;
+    border-top: 1px solid rgba(26,23,20,0.08);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo-icon">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+  </div>
+  <div>
+    <div class="logo-text">TextExport</div>
+    <div class="logo-sub">网页内容导出工具</div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="step">
+    <div class="num">1</div>
+    <div class="step-text">在任意网页（如 GitHub、知乎、新闻页）<strong>用鼠标选中文字或图片</strong></div>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <div class="step-text">选中后会自动弹出悬浮工具栏</div>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <div class="step-text">
+      点击 <span class="badge badge-word">Word</span> 直接下载 .doc 文件<br>
+      点击 <span class="badge badge-pdf">PDF</span> 打开预览页，使用 Edge 打印另存为 PDF
+    </div>
+  </div>
+</div>
+
+<div class="footer">已激活 · 在所有页面可用</div>
+</body>
+</html>

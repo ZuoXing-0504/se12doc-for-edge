@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>TextExport · PDF 预览</title>
+<style>
+  :root {
+    --ink: #1a1714;
+    --ink-2: #4a4540;
+    --ink-3: #8a847e;
+    --paper: #faf8f4;
+    --amber: #c8820a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Songti SC', 'STSong', 'SimSun', serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 0;
+  }
+
+  /* ── Screen preview ── */
+  @media screen {
+    body { padding: 40px 0; background: #e8e1d4; }
+
+    .page {
+      max-width: 740px;
+      margin: 0 auto;
+      background: white;
+      padding: 56px 64px 72px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+      border-radius: 4px;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      background: #1a1714;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .toolbar-logo {
+      font-family: 'Songti SC', 'STSong', 'SimSun', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-logo span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+      font-weight: 400;
+    }
+
+    .toolbar-btns { display: flex; gap: 8px; }
+
+    .t-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+      font-weight: 500;
+      transition: filter 0.12s;
+    }
+
+    .t-btn:hover { filter: brightness(1.12); }
+    .t-btn:active { transform: scale(0.97); }
+    .t-btn svg { width: 14px; height: 14px; }
+
+    .t-print { background: #c8820a; color: white; }
+    .t-close { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+
+    body { padding-top: 92px; }
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    body { background: white; }
+    .toolbar { display: none !important; }
+    .page { padding: 0; box-shadow: none; }
+    @page { margin: 2cm; size: A4; }
+  }
+
+  /* ── Content styles (shared) ── */
+  .doc-header {
+    border-bottom: 1.5px solid var(--amber);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+
+  h1.doc-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .doc-meta {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    line-height: 1.6;
+  }
+
+  .doc-meta a { color: var(--ink-3); text-decoration: none; }
+
+  .doc-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+
+  .doc-body p { margin-bottom: 0.7em; }
+  .doc-body p:last-child { margin-bottom: 0; }
+
+  .doc-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 16px auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .doc-body figure,
+  .doc-body table,
+  .doc-body blockquote,
+  .doc-body pre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .doc-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.9em;
+  }
+
+  .doc-body th,
+  .doc-body td {
+    border: 1px solid #d8d2cb;
+    padding: 7px 9px;
+    vertical-align: top;
+  }
+
+  .doc-body blockquote {
+    margin: 0 0 0.9em;
+    padding-left: 14px;
+    border-left: 3px solid var(--amber);
+    color: var(--ink-2);
+  }
+
+  .doc-body pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    background: #f6f2eb;
+    padding: 10px 12px;
+    margin-bottom: 0.9em;
+  }
+
+  .empty-line { height: 0.5em; }
+
+  /* ── Loading state ── */
+  .loading {
+    text-align: center;
+    padding: 80px 40px;
+    color: var(--ink-3);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<!-- Screen-only toolbar -->
+<div class="toolbar">
+  <div class="toolbar-logo">
+    TextExport
+    <span>PDF 预览</span>
+  </div>
+  <div class="toolbar-btns">
+    <button class="t-btn t-print" id="btn-print">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 6 2 18 2 18 9"/>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+        <rect x="6" y="14" width="12" height="8"/>
+      </svg>
+      打印 / 另存为 PDF
+    </button>
+    <button class="t-btn t-close" id="btn-close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+      关闭
+    </button>
+  </div>
+</div>
+
+<!-- Document page -->
+<div class="page">
+  <div class="loading" id="loading">正在加载内容……</div>
+  <div id="content" style="display:none">
+    <div class="doc-header">
+      <h1 class="doc-title" id="doc-title"></h1>
+      <div class="doc-meta" id="doc-meta"></div>
+    </div>
+    <div class="doc-body" id="doc-body"></div>
+  </div>
+</div>
+
+<script src="print.js"></script>
+</body>
+</html>
