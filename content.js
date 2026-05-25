@@ -146,6 +146,12 @@
 
   /* ── Selection state ── */
   let savedSelection = null;
+  let pendingUpdate = 0;
+
+  function scheduleUpdate(delay) {
+    clearTimeout(pendingUpdate);
+    pendingUpdate = setTimeout(updateBar, delay);
+  }
 
   function getSelectionText() {
     return (window.getSelection() || '').toString().trim();
@@ -199,9 +205,9 @@
     bar.classList.add('on');
   }
 
-  document.addEventListener('mouseup',        () => setTimeout(updateBar, 30));
-  document.addEventListener('keyup',          () => setTimeout(updateBar, 30));
-  document.addEventListener('selectionchange',() => setTimeout(updateBar, 30));
+  document.addEventListener('mouseup',        () => scheduleUpdate(30));
+  document.addEventListener('keyup',          () => scheduleUpdate(30));
+  document.addEventListener('selectionchange',() => scheduleUpdate(80));
 
   /* Clicking outside clears bar */
   document.addEventListener('mousedown', (e) => {
@@ -411,14 +417,17 @@ ${contentHtml}
       te_url: selection.url || location.href,
     };
 
-    return chrome.storage.local.set(payload).catch(() => {
-      const fallbackPayload = {
-        te_text: payload.te_text,
-        te_html: selection.fallbackHtml || textToHtml(selection.text),
-        te_title: payload.te_title,
-        te_url: payload.te_url,
-      };
-      return chrome.storage.local.set(fallbackPayload);
+    const fallbackPayload = {
+      te_text: payload.te_text,
+      te_html: selection.fallbackHtml || textToHtml(selection.text),
+      te_title: payload.te_title,
+      te_url: payload.te_url,
+    };
+
+    return chrome.storage.session.set(payload).catch(() => {
+      return chrome.storage.local.set(fallbackPayload).catch(() => {
+        return chrome.storage.local.set(payload);
+      });
     });
   }
 
@@ -455,7 +464,10 @@ ${contentHtml}
       const ctx = canvas.getContext('2d');
       if (!ctx) return '';
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      return canvas.toDataURL('image/png');
+      const largeImage = width > 600 && height > 400;
+      return largeImage
+        ? canvas.toDataURL('image/jpeg', 0.85)
+        : canvas.toDataURL('image/png');
     } catch {
       return '';
     }

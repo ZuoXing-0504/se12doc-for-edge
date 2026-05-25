@@ -1,7 +1,7 @@
-# 选字导出 · sel2doc for Edge
+# 选字导出 · TextExport for Edge
 
-> 将任意网页选中的文字一键导出为 Word 或 PDF 文档
-> Export selected text from any webpage to Word or PDF with one click
+> 将任意网页选中的文字或图片一键导出为 Word 或 PDF 文档
+> Export selected text and images from any webpage to Word or PDF with one click
 
 ![Edge](https://img.shields.io/badge/Microsoft%20Edge-适配-0078D7?logo=microsoft-edge&logoColor=white)
 ![Manifest](https://img.shields.io/badge/Manifest-V3-brightgreen)
@@ -11,9 +11,9 @@
 
 ## 简介 · Introduction
 
-**选字导出** 是一款适配 Microsoft Edge 的浏览器扩展。在任意网页（GitHub、知乎、新闻页、文档站等）选中文字后，会自动弹出悬浮工具栏，一键将所选内容导出为 `.doc` 或 `.pdf` 文件，无需复制粘贴，无需打开额外应用。
+**选字导出** 是一款适配 Microsoft Edge 的浏览器扩展。在任意网页（GitHub、知乎、新闻页、文档站等）选中文字或图片后，会自动弹出悬浮工具栏，一键将所选内容导出为 `.doc` 或 `.pdf` 文件，图片会自动嵌入文档，无需复制粘贴，无需打开额外应用。
 
-**sel2doc** is a Microsoft Edge browser extension. Select any text on any webpage — GitHub, Zhihu, news sites, documentation — and a floating toolbar appears instantly. Export the selection to `.doc` or `.pdf` in one click, no copy-paste, no extra apps needed.
+**TextExport** is a Microsoft Edge browser extension. Select any text or images on any webpage — GitHub, Zhihu, news sites, documentation — and a floating toolbar appears instantly. Export the selection to `.doc` or `.pdf` in one click, with images embedded automatically. No copy-paste, no extra apps needed.
 
 ---
 
@@ -21,7 +21,8 @@
 
 | 功能 | Feature |
 |------|---------|
-| 🖱️ 选中即弹出悬浮工具栏 | Floating toolbar appears on text selection |
+| 🖱️ 选中即弹出悬浮工具栏 | Floating toolbar appears on selection |
+| 🖼️ 支持文字 + 图片导出 | Supports text and image export |
 | 📄 导出为 Word (.doc) | Export to Word (.doc) |
 | 🖨️ 导出为 PDF（打印预览） | Export to PDF via print preview |
 | 🌐 适配所有网页 | Works on all webpages |
@@ -57,16 +58,16 @@
 
 **中文：**
 
-1. 在任意网页，用鼠标选中你想保存的文字
+1. 在任意网页，用鼠标选中你想保存的文字或图片
 2. 自动弹出悬浮工具栏（黑色浮窗）
-3. 点击 **Word** → 直接下载 `.doc` 文件
+3. 点击 **Word** → 直接下载 `.doc` 文件（图片自动嵌入）
 4. 点击 **PDF** → 打开预览页，使用 Edge 打印功能另存为 PDF
 
 **English:**
 
-1. On any webpage, select the text you want to save
+1. On any webpage, select the text or images you want to save
 2. A floating toolbar (dark popup) appears automatically
-3. Click **Word** → downloads a `.doc` file directly
+3. Click **Word** → downloads a `.doc` file directly (images auto-embedded)
 4. Click **PDF** → opens a preview page; use Edge's print dialog to save as PDF
 
 ---
@@ -99,9 +100,9 @@ textexport-ext/
 
 ## 隐私说明 · Privacy
 
-本扩展不收集、不上传任何用户数据。所有操作（文字提取、文件生成）均在本地浏览器内完成。
+本扩展不收集、不上传任何用户数据。所有操作（文字/图片提取、文件生成）均在本地浏览器内完成。
 
-This extension collects no user data and makes no network requests. All operations — text extraction and file generation — happen entirely within your local browser.
+This extension collects no user data and makes no network requests. All operations — text and image extraction, file generation — happen entirely within your local browser.
 
 ---
 
