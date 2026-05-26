@@ -45,6 +45,8 @@
 5. 扩展栏出现图标，加载后刷新已打开的网页即可使用 ✅
 
 > ⚠️ **易错提示**：解压后是一个 `se12doc-for-edge-main` 文件夹，里面直接就是 `manifest.json`。加载时必须选中**这一层** —— 不能选它的上级目录，也不能点进文件夹内部再去选子目录。如果 Edge 报"文件找不到/已损毁"，多半是选错了层级。
+>
+> 部分解压工具会产生双层嵌套，例如 `…\Downloads\se12doc-for-edge-main\se12doc-for-edge-main\`。如果你看到的路径里有两个同名文件夹，选**最里面那个**（点进去能看到 `manifest.json` 的那层），而不是外面的。
 
 **English steps:**
 
@@ -55,6 +57,8 @@
 5. The extension icon appears — refresh any open pages to activate ✅
 
 > ⚠️ **Common mistake**: The unzipped folder `se12doc-for-edge-main` contains `manifest.json` directly. Select **this exact folder** — not its parent, not a subfolder inside it. If Edge shows "file not found / corrupted", you're likely selecting the wrong folder level.
+>
+> Some unzip tools create a double-nested structure, e.g. `…\Downloads\se12doc-for-edge-main\se12doc-for-edge-main\`. If you see the folder name twice in the path, pick the **innermost one** (the layer where you can see `manifest.json`), not the outer one.
 
 ---
 
