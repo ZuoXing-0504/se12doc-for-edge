@@ -41,16 +41,20 @@
 1. 点击右上角 **Code → Download ZIP**，下载并解压本仓库
 2. 打开 Edge 浏览器，地址栏输入 `edge://extensions` 并回车
 3. 右上角开启 **开发人员模式**
-4. 点击 **加载解压缩的扩展**，选择解压后的 `textexport-ext` 文件夹
-5. 扩展栏出现图标，安装完成 ✅
+4. 点击 **加载解压缩的扩展**，选择解压后包含 `manifest.json` 的文件夹（即 `se12doc-for-edge-main`）
+5. 扩展栏出现图标，加载后刷新已打开的网页即可使用 ✅
+
+> ⚠️ **易错提示**：解压后是一个 `se12doc-for-edge-main` 文件夹，里面直接就是 `manifest.json`。加载时必须选中**这一层** —— 不能选它的上级目录，也不能点进文件夹内部再去选子目录。如果 Edge 报"文件找不到/已损毁"，多半是选错了层级。
 
 **English steps:**
 
 1. Click **Code → Download ZIP** at the top right, then unzip
 2. Open Edge and navigate to `edge://extensions`
 3. Enable **Developer mode** in the top-right corner
-4. Click **Load unpacked** and select the unzipped `textexport-ext` folder
-5. The extension icon appears in the toolbar — done ✅
+4. Click **Load unpacked** and select the folder containing `manifest.json` (i.e. `se12doc-for-edge-main`)
+5. The extension icon appears — refresh any open pages to activate ✅
+
+> ⚠️ **Common mistake**: The unzipped folder `se12doc-for-edge-main` contains `manifest.json` directly. Select **this exact folder** — not its parent, not a subfolder inside it. If Edge shows "file not found / corrupted", you're likely selecting the wrong folder level.
 
 ---
 
