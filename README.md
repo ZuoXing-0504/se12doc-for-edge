@@ -67,14 +67,14 @@
 **中文：**
 
 1. 在任意网页，用鼠标选中你想保存的文字或图片
-2. 自动弹出悬浮工具栏（黑色浮窗）
+2. 选中内容正上方会自动弹出悬浮工具栏（黑色浮窗）
 3. 点击 **Word** → 直接下载 `.doc` 文件（图片自动嵌入）
 4. 点击 **PDF** → 打开预览页，使用 Edge 打印功能另存为 PDF
 
 **English:**
 
 1. On any webpage, select the text or images you want to save
-2. A floating toolbar (dark popup) appears automatically
+2. A floating toolbar (dark popup) appears right above the selection
 3. Click **Word** → downloads a `.doc` file directly (images auto-embedded)
 4. Click **PDF** → opens a preview page; use Edge's print dialog to save as PDF
 
